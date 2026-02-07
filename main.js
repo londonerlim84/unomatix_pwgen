@@ -32,6 +32,10 @@ const i18n = {
     strengthVeryStrong: '매우 강함',
     historyCleared: '히스토리가 삭제되었습니다.',
     noCharType: '최소 하나의 문자 유형을 선택해주세요.',
+    qrTooltip: 'QR 코드',
+    qrTitle: 'QR 코드',
+    qrHint: '모바일 카메라로 스캔하세요',
+    noPassword: '먼저 비밀번호를 생성해주세요.',
   },
   en: {
     appTitle: 'Unomatix PwGen',
@@ -65,6 +69,10 @@ const i18n = {
     strengthVeryStrong: 'Very Strong',
     historyCleared: 'History cleared.',
     noCharType: 'Select at least one character type.',
+    qrTooltip: 'QR Code',
+    qrTitle: 'QR Code',
+    qrHint: 'Scan with your mobile camera',
+    noPassword: 'Generate a password first.',
   }
 };
 
@@ -114,6 +122,10 @@ const dom = {
   passphraseSettings: $('#passphraseSettings'),
   passwordOutput: $('#passwordOutput'),
   mainCopyBtn: $('#mainCopyBtn'),
+  mainQrBtn: $('#mainQrBtn'),
+  qrModalOverlay: $('#qrModalOverlay'),
+  qrModalClose: $('#qrModalClose'),
+  qrModalBody: $('#qrModalBody'),
   strengthFill: $('#strengthFill'),
   strengthLabel: $('#strengthLabel'),
   entropyLabel: $('#entropyLabel'),
@@ -437,6 +449,24 @@ function clearHistory() {
   showToast(t('historyCleared'));
 }
 
+// ===== QR Code =====
+function showQrModal(text) {
+  if (!text) {
+    showToast(t('noPassword'));
+    return;
+  }
+  const qr = qrcode(0, 'M');
+  qr.addData(text);
+  qr.make();
+  dom.qrModalBody.innerHTML = qr.createImgTag(6, 0);
+  dom.qrModalOverlay.classList.remove('hidden');
+}
+
+function closeQrModal() {
+  dom.qrModalOverlay.classList.add('hidden');
+  dom.qrModalBody.innerHTML = '';
+}
+
 // ===== Utilities =====
 function escapeHtml(str) {
   const div = document.createElement('div');
@@ -508,6 +538,17 @@ function init() {
     if (currentPassword) {
       copyToClipboard(currentPassword, dom.mainCopyBtn);
     }
+  });
+
+  // Main QR button
+  dom.mainQrBtn.addEventListener('click', () => {
+    showQrModal(currentPassword);
+  });
+
+  // QR modal close
+  dom.qrModalClose.addEventListener('click', closeQrModal);
+  dom.qrModalOverlay.addEventListener('click', (e) => {
+    if (e.target === dom.qrModalOverlay) closeQrModal();
   });
 
   // Delegated copy buttons for results and history

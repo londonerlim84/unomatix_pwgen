@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Unomatix Password Generator</title>
   <link href='/style.css' rel='stylesheet'>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
 </head>
 <body>
   <div class="app-container">
@@ -40,6 +41,13 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
             <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+          </svg>
+        </button>
+        <button class="qr-btn" id="mainQrBtn" title="QR Code" data-i18n-title="qrTooltip">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="8" height="8" rx="1"/><rect x="14" y="2" width="8" height="8" rx="1"/>
+            <rect x="2" y="14" width="8" height="8" rx="1"/><rect x="14" y="14" width="4" height="4" rx="0.5"/>
+            <line x1="22" y1="14" x2="22" y2="18"/><line x1="18" y1="22" x2="22" y2="22"/>
           </svg>
         </button>
       </div>
@@ -178,6 +186,18 @@
     <footer class="app-footer">
       <p>Unomatix PwGen &copy; 2026</p>
     </footer>
+  </div>
+
+  <!-- QR Modal -->
+  <div class="qr-modal-overlay hidden" id="qrModalOverlay">
+    <div class="qr-modal">
+      <div class="qr-modal-header">
+        <h3 data-i18n="qrTitle">QR 코드</h3>
+        <button class="qr-modal-close" id="qrModalClose">&times;</button>
+      </div>
+      <div class="qr-modal-body" id="qrModalBody"></div>
+      <p class="qr-modal-hint" data-i18n="qrHint">모바일 카메라로 스캔하세요</p>
+    </div>
   </div>
 
   <div class="toast hidden" id="toast"></div>
