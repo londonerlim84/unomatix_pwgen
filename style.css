@@ -29,6 +29,22 @@
   --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans KR', sans-serif;
 }
 
+/* ===== Light Theme ===== */
+[data-theme="light"] {
+  --bg-primary: #f0f2f5;
+  --bg-secondary: #ffffff;
+  --card-bg: rgba(0, 0, 0, 0.03);
+  --card-border: rgba(0, 0, 0, 0.1);
+  --text-primary: #1a1a2e;
+  --text-secondary: #555570;
+  --text-muted: #8888a0;
+  --strength-weak: #dc2626;
+  --strength-fair: #ea580c;
+  --strength-good: #ca8a04;
+  --strength-strong: #16a34a;
+  --strength-very: #059669;
+}
+
 html {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
@@ -76,6 +92,44 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* Header Actions */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Theme Toggle */
+.theme-toggle {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  color: var(--text-primary);
+  padding: 7px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 12px rgba(0, 212, 255, 0.2);
+}
+
+.theme-toggle .icon-moon {
+  display: none;
+}
+
+[data-theme="light"] .theme-toggle .icon-sun {
+  display: none;
+}
+
+[data-theme="light"] .theme-toggle .icon-moon {
+  display: block;
 }
 
 .lang-toggle {
@@ -792,6 +846,85 @@ body {
   .sep-btn {
     min-width: calc(50% - 4px);
   }
+}
+
+/* ===== Light Theme Overrides ===== */
+[data-theme="light"] body {
+  background: linear-gradient(160deg, var(--bg-primary) 0%, #e8eaf0 100%);
+}
+
+[data-theme="light"] .mode-tab:not(.active):hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .toggle-switch {
+  background: rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="light"] .toggle-switch::after {
+  background: #999;
+}
+
+[data-theme="light"] .toggle-item {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+[data-theme="light"] .toggle-item:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .length-input,
+[data-theme="light"] .count-input {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .range-slider {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .range-slider::-webkit-slider-thumb {
+  border-color: #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="light"] .range-slider::-moz-range-thumb {
+  border-color: #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="light"] .sep-btn {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+[data-theme="light"] .strength-bar {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .toast {
+  background: rgba(0, 212, 255, 0.1);
+  border-color: rgba(0, 212, 255, 0.4);
+}
+
+[data-theme="light"] .qr-modal {
+  background: #fff;
+}
+
+[data-theme="light"] .clear-history-btn {
+  border-color: rgba(220, 38, 38, 0.3);
+  color: #dc2626;
+}
+
+[data-theme="light"] .clear-history-btn:hover {
+  background: rgba(220, 38, 38, 0.06);
+  border-color: rgba(220, 38, 38, 0.5);
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.2);
 }
 
 /* ===== Selection ===== */

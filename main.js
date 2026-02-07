@@ -36,6 +36,7 @@ const i18n = {
     qrTitle: 'QR 코드',
     qrHint: '모바일 카메라로 스캔하세요',
     noPassword: '먼저 비밀번호를 생성해주세요.',
+    themeTooltip: '테마 전환',
   },
   en: {
     appTitle: 'Unomatix PwGen',
@@ -73,6 +74,7 @@ const i18n = {
     qrTitle: 'QR Code',
     qrHint: 'Scan with your mobile camera',
     noPassword: 'Generate a password first.',
+    themeTooltip: 'Toggle Theme',
   }
 };
 
@@ -115,6 +117,7 @@ const $ = (sel) => document.querySelector(sel);
 const $$ = (sel) => document.querySelectorAll(sel);
 
 const dom = {
+  themeToggle: $('#themeToggle'),
   langToggle: $('#langToggle'),
   langLabel: $('#langLabel'),
   modeTabs: $$('.mode-tab'),
@@ -178,6 +181,19 @@ function toggleLanguage() {
   currentLang = currentLang === 'ko' ? 'en' : 'ko';
   applyLanguage();
   renderHistory();
+}
+
+// ===== Theme =====
+function applyTheme() {
+  const savedTheme = localStorage.getItem('pwgen-theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', savedTheme);
+}
+
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme') || 'dark';
+  const next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('pwgen-theme', next);
 }
 
 // ===== Password Generation =====
@@ -480,6 +496,10 @@ function escapeAttr(str) {
 
 // ===== Event Listeners =====
 function init() {
+  // Theme toggle
+  applyTheme();
+  dom.themeToggle.addEventListener('click', toggleTheme);
+
   // Language toggle
   dom.langToggle.addEventListener('click', toggleLanguage);
 
