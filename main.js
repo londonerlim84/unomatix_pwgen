@@ -2,8 +2,8 @@
 const i18n = {
   ko: {
     appTitle: 'Unomatix PwGen',
-    tabPassword: '비밀번호',
-    tabPassphrase: '패스프레이즈',
+    tabPassword: '무작위',
+    tabPassphrase: '단어조합',
     placeholder: '생성 버튼을 눌러주세요',
     copyTooltip: '복사',
     length: '길이',
